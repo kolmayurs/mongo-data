@@ -28,7 +28,7 @@ class App extends React.Component {
     }
     getProducts(){
       this.setState({loading: true})
-      fetch('/products')
+      fetch('https://product-server.herokuapp.com/products')
       .then(res => res.json())
       .then(res => this.setState({products: res.data,loading: false, name: '', price:0}));
     }
@@ -46,13 +46,13 @@ class App extends React.Component {
 
     addProducts(){
       this.setState({loading: true})
-      fetch('/products/add?name='+this.state.name+'&price='+Number(this.state.price))
+      fetch('https://product-server.herokuapp.com/products/add?name='+this.state.name+'&price='+Number(this.state.price))
       .then(this.getProducts)
       .catch(err => console.error(err));
     }
     delProducts(name){
       this.setState({loading: true})
-      fetch('/products/delete?name='+name)
+      fetch('https://product-server.herokuapp.com/products/delete?name='+name)
       .then(this.getProducts)
       .catch(err => console.error(err));
     }
@@ -62,7 +62,7 @@ class App extends React.Component {
 
     upadetProducts(name){
        this.setState({loading: true})
-      fetch('/products/update?oldname='+name+'&name='+this.state.name+'&price='+Number(this.state.price))
+      fetch('https://product-server.herokuapp.com/products/update?oldname='+name+'&name='+this.state.name+'&price='+Number(this.state.price))
       .then(this.getProducts)
       .catch(err => console.error(err));
       this.setState({edit: false, name: '', price:0});
